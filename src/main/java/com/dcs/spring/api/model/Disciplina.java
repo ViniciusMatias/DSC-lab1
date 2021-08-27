@@ -1,20 +1,37 @@
 package com.dcs.spring.api.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Disciplina {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
-	private int id;
+@Entity
+public class Disciplina implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	private Integer id;
 	private String nome;
-	private int likes;
-	private List<Double> notas;
+	private Integer likes;	
+	@JoinColumn(name = "disciplina_id")
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Nota> notas;
 	
 	public Disciplina() {
 		super();
 	}
 	
-	public Disciplina(int id, String nome, int likes, List<Double> notas) {
+	public Disciplina(int id, String nome, int likes, List<Nota> notas) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -39,10 +56,10 @@ public class Disciplina {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	public List<Double> getNotas() {
+	public List<Nota> getNotas() {
 		return notas;
 	}
-	public void setNotas(List<Double> notas) {
+	public void setNotas(List<Nota> notas) {
 		this.notas = notas;
 	}
 
