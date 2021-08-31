@@ -67,6 +67,15 @@ public class Disciplina implements Serializable{
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+	public double notaMediaDaDisciplina() {
+		double notaMax= 0;
+		for(Nota notas : this.notas) {
+			notaMax = notaMax + notas.getNota();
+		}
+		
+		return notaMax/this.notas.size();
+		
+	}
 
 	@Override
 	public boolean equals(Object obj) {
