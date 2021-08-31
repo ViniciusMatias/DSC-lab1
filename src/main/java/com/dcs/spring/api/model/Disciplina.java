@@ -17,10 +17,10 @@ public class Disciplina implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Integer id;
+	
 	private String nome;
 	private Integer likes;	
 	@JoinColumn(name = "disciplina_id")
@@ -31,17 +31,17 @@ public class Disciplina implements Serializable{
 		super();
 	}
 	
-	public Disciplina(int id, String nome, int likes, List<Nota> notas) {
+	public Disciplina(Integer id, String nome, int likes, List<Nota> notas) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.likes = likes;
 		this.notas = notas;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNome() {

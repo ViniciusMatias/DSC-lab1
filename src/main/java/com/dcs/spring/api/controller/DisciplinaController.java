@@ -20,13 +20,13 @@ import com.dcs.spring.api.model.Disciplina;
 import com.dcs.spring.api.services.DisciplinaServices;
 
 @Controller
-@RestController("/v1/api/disciplinas")
+@RestController
 public class DisciplinaController {
 	
 	@Autowired
 	private DisciplinaServices disciplinaServices;
 	
-	@PostMapping
+	@PostMapping("/v1/api/disciplinas")
 	public ResponseEntity<Disciplina> criarDisciplina(@RequestBody Disciplina disciplina) {
 		Disciplina disciplinaResponse = disciplinaServices.criar(disciplina);
 		
@@ -38,33 +38,33 @@ public class DisciplinaController {
 		
 		return ResponseEntity.created(location).build();
 	}
-	@GetMapping
+	@GetMapping("/v1/api/disciplinas")
 	public ResponseEntity<List<Disciplina>> buscarDisciplina(){
 		return ResponseEntity.ok(disciplinaServices.buscar());
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/v1/api/disciplinas/{id}")
 	public ResponseEntity<Disciplina> buscarDisciplinaPorID(@PathVariable Integer id){
 		return ResponseEntity.ok(disciplinaServices.buscarPorId(id));
 	}
-	@PatchMapping("/{id}/nome")
+	@PatchMapping("/v1/api/disciplinas/{id}/nome")
 	public ResponseEntity<Disciplina> atualizarNomeDaDisciplina(@PathVariable Integer id, @RequestBody Disciplina disciplinaUpdate){
 		
 		
 		return ResponseEntity.ok(disciplinaServices.atualizaNomeDisciplina(id, disciplinaUpdate));
 	}
 	
-	@PatchMapping("/{id}/nota")
+	@PatchMapping("/v1/api/disciplinas/{id}/nota")
 	public ResponseEntity<Disciplina> atualizarNotaDaDisciplina(@PathVariable Integer id, @RequestBody Disciplina disciplinaUpdate){
 		
 		
 		return ResponseEntity.ok(disciplinaServices.atualizaNotaDisciplina(id, disciplinaUpdate));
 	}
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/v1/api/disciplinas/{id}")
 	public void removeDisciplinaComId(@PathVariable Integer id) {
 		disciplinaServices.deletar(id);
 	}
-	@GetMapping("/ranking")
+	@GetMapping("/v1/api/disciplinas/ranking")
 	public ResponseEntity<List<Disciplina>> buscarDiciplinasPorMaiorNota(){
 		return ResponseEntity.ok(disciplinaServices.disciplinasComMaioresNotas());
 	}

@@ -42,7 +42,7 @@ public class DisciplinaServices {
 	public Disciplina atualizaNomeDisciplina(Integer id, Disciplina disciplinaUpdate) {
 		Disciplina disciplina = buscarPorId(id);
 		BeanUtils.copyProperties(disciplinaUpdate, disciplina, "id", "likes", "notas");
-		return disciplina;
+		return(disciplinaRepository.save(disciplina));
 	}
 
 
@@ -50,7 +50,9 @@ public class DisciplinaServices {
 	public Disciplina atualizaNotaDisciplina(Integer id, Disciplina disciplinaUpdate) {
 		Disciplina disciplina = buscarPorId(id);
 		BeanUtils.copyProperties(disciplinaUpdate, disciplina, "id", "likes", "nome");
-		return disciplina;
+		
+		return(disciplinaRepository.save(disciplina));
+		
 	}
 
 
@@ -62,7 +64,7 @@ public class DisciplinaServices {
 	public List<Disciplina> disciplinasComMaioresNotas(){
 		List<Disciplina> lista = disciplinaRepository.findAll();
 		
-		Collections.sort(lista, Comparator.comparing(Disciplina::notaMediaDaDisciplina));
+		Collections.sort(lista, Comparator.comparing(Disciplina::notaMediaDaDisciplina).reversed());
 		
 		return lista;
 	}
