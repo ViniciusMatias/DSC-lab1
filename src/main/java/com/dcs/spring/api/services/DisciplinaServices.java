@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.dcs.spring.api.model.Disciplina;
 import com.dcs.spring.api.repository.DisciplinaRepository;
+import com.dcs.spring.api.services.exception.EntityNotFoundEx;
 
 @Service
 public class DisciplinaServices {
@@ -30,11 +31,10 @@ public class DisciplinaServices {
 		return disciplinaRepository.findAll();
 		
 	}
-
-
-
+	
 	public Disciplina buscarPorId(Integer id) {
-		return disciplinaRepository.findById(id).get();
+		return disciplinaRepository.findById(id).orElseThrow(
+				() -> new EntityNotFoundEx("Id não Existe !"));
 	}
 
 
