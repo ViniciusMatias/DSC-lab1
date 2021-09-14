@@ -13,7 +13,7 @@ import com.dcs.spring.api.model.Nota;
 import com.dcs.spring.api.repository.DisciplinaRepository;
 
 @SpringBootApplication
-public class DscLab1Application implements CommandLineRunner {
+public class DscLab1Application {
 
 	@Autowired
 	private DisciplinaRepository disciplinaRepository;
@@ -22,16 +22,5 @@ public class DscLab1Application implements CommandLineRunner {
 		SpringApplication.run(DscLab1Application.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		System.err.println("Rodando...!");
-		
-		List<Nota> notas = new ArrayList<>();						
-		notas.add(new Nota(1,10.0));
-		notas.add(new Nota(2,9.0));
-		disciplinaRepository.save(new Disciplina(1,"Geografia", 4, notas));
-		
-	
-	}
 
 }

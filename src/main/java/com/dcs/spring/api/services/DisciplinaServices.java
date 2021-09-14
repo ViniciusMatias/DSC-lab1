@@ -55,9 +55,8 @@ public class DisciplinaServices {
 		
 	}
 
-
-
 	public void deletar(Integer id) {
+		buscarPorId(id);
 		disciplinaRepository.deleteById(id);
 	}
 	
