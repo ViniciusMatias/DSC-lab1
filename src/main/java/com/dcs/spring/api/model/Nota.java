@@ -2,10 +2,7 @@ package com.dcs.spring.api.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Nota implements Serializable{
@@ -16,15 +13,27 @@ public class Nota implements Serializable{
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Double nota;
-	
-	public Nota(Integer id, Double nota) {
-		super();
+//	@ManyToOne
+//	@JoinColumn(name = "disciplina_id")
+	private Disciplina disciplina;
+
+
+
+	public Nota(Integer id, Double nota, Disciplina disciplina) {
+
 		this.id = id;
 		this.nota = nota;
+		this.disciplina = disciplina;
+	}
+	public Disciplina getDisciplina() {
+		return disciplina;
 	}
 
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
 	public Nota() {
-		super();
+
 	}
 
 	public Integer getId() {

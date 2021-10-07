@@ -4,13 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Disciplina implements Serializable{
@@ -22,21 +16,27 @@ public class Disciplina implements Serializable{
 	private Integer id;
 	
 	private String nome;
-	private Integer likes;	
+	private int likes;
+//	@OneToMany(mappedBy = "disciplina")
 	@JoinColumn(name = "disciplina_id")
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Nota> notas;
+//	@OneToMany(mappedBy = "disciplina")
+	@JoinColumn(name = "disciplina_id")
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Comentario> comentarios;
 	
 	public Disciplina() {
-		super();
+
 	}
 	
-	public Disciplina(Integer id, String nome, int likes, List<Nota> notas) {
+	public Disciplina(Integer id, String nome, int likes, List<Nota> notas, List<Comentario> comentarios) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.likes = likes;
 		this.notas = notas;
+		this.comentarios = comentarios;
 	}
 	public Integer getId() {
 		return id;
@@ -62,11 +62,19 @@ public class Disciplina implements Serializable{
 	public void setNotas(List<Nota> notas) {
 		this.notas = notas;
 	}
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	public double notaMediaDaDisciplina() {
 		double notaMax= 0;
 		for(Nota notas : this.notas) {
@@ -88,7 +96,5 @@ public class Disciplina implements Serializable{
 		Disciplina other = (Disciplina) obj;
 		return id == other.id;
 	}
-	
-	
-	
+
 }
